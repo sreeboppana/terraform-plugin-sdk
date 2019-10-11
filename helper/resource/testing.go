@@ -547,11 +547,6 @@ func Test(t TestT, c TestCase) {
 		c.PreCheck()
 	}
 
-	if acctest.TestHelper != nil {
-		RunLegacyTest(t.(*testing.T), c)
-		return
-	}
-
 	// get instances of all providers, so we can use the individual
 	// resources to shim the state during the tests.
 	providers := make(map[string]terraform.ResourceProvider)
@@ -561,6 +556,12 @@ func Test(t TestT, c TestCase) {
 			t.Fatal(err)
 		}
 		providers[name] = p
+	}
+
+	if acctest.TestHelper != nil {
+		// inject providers for ImportStateVerify
+		RunLegacyTest(t.(*testing.T), c, providers)
+		return
 	}
 
 	providerResolver, err := testProviderResolver(c)
