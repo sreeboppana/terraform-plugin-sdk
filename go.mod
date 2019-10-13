@@ -31,7 +31,7 @@ require (
 	github.com/hashicorp/hil v0.0.0-20190212112733-ab17b08d6590
 	github.com/hashicorp/logutils v1.0.0
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20190821133035-82a99dc22ef4
-	github.com/hashicorp/terraform-json v0.3.0
+	github.com/hashicorp/terraform-json v0.3.1-0.20191010151747-864936bdc5ac
 	github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d // indirect
 	github.com/keybase/go-crypto v0.0.0-20161004153544-93f5b35093ba
 	github.com/mitchellh/cli v1.0.0

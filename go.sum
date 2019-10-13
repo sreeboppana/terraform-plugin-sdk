@@ -107,6 +107,8 @@ github.com/hashicorp/terraform-config-inspect v0.0.0-20190821133035-82a99dc22ef4
 github.com/hashicorp/terraform-config-inspect v0.0.0-20190821133035-82a99dc22ef4/go.mod h1:JDmizlhaP5P0rYTTZB0reDMefAiJyfWPEtugV4in1oI=
 github.com/hashicorp/terraform-json v0.3.0 h1:DK5sWm+LJrBQtURN11EJuScdHHcTMq2gtvgP0dpXrRM=
 github.com/hashicorp/terraform-json v0.3.0/go.mod h1:wXV7+To33w9ism+RXUnaYk67mR6lnsflM2espC7RR58=
+github.com/hashicorp/terraform-json v0.3.1-0.20191010151747-864936bdc5ac h1:WIZ7C8W9pBsgLvHWjLWxtIf6qjBCpr9PWAPHw2XFrE8=
+github.com/hashicorp/terraform-json v0.3.1-0.20191010151747-864936bdc5ac/go.mod h1:MdwQStcJb00ht55L/2YH0ypAO9RNtczJ1MaUlf+gJcg=
 github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb/go.mod h1:+NfK9FKeTrX5uv1uIXGdwYDTeHna2qgaIlx54MXqjAM=
 github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d h1:kJCB4vdITiW1eC1vq2e6IsrXKrZit1bv/TDYFGMp4BQ=
 github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d/go.mod h1:+NfK9FKeTrX5uv1uIXGdwYDTeHna2qgaIlx54MXqjAM=
