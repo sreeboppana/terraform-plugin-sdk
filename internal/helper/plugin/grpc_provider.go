@@ -894,7 +894,8 @@ func (s *GRPCProviderServer) ApplyResourceChange(_ context.Context, req *proto.A
 		PlannedState: plannedStateVal,
 		Config:       configVal,
 	}
-	schema.ApplyResourceChange(priorState.ID, &schemaReq)
+	applyRequests := schema.ApplyResourceChangeChan(schemaReq.TypeName, priorState.ID)
+	applyRequests <- &schemaReq
 	newInstanceState, err := s.provider.Apply(info, priorState, diff)
 	// we record the error here, but continue processing any returned state.
 	if err != nil {
@@ -907,6 +908,9 @@ func (s *GRPCProviderServer) ApplyResourceChange(_ context.Context, req *proto.A
 	if schemaResp := schemaReq.GetResponse(); schemaResp != nil {
 		newStateVal = schemaResp.NewState
 		setByExperimentalFunc = true
+	} else {
+		// consume request so subsequent requests are unblocked
+		<-applyRequests
 	}
 
 	// TODO: should this early exit logic change if newStateVal was set by

@@ -212,30 +212,34 @@ type ApplyResourceChangeResponse struct {
 	NewState cty.Value
 }
 
-// due to the concurrent nature of the grpc server
 // create unique channels for each resourceType and instance ID
+// used to circumvent old API. To ensure no data races, these channels can only
+// be of size 1 and need to be emptied even if request was not consumed by
+// new CRUD func, this could bottleneck many concurrent create requests (no id)
+// to correct this issue, we would need special handling of create requests
+// if we were to simply increase the buffer to a large number, there *might* be
+// a bug where the wrong create request is processed and terraform would receive
+// an inconsistent result.
+// (there is no id, but terraform still expected a specific result/state)
 var applyResourceChangeRequests map[string]chan *ApplyResourceChangeRequest = make(map[string]chan *ApplyResourceChangeRequest)
 var applyResourceChangeRequestsMu *sync.Mutex = &sync.Mutex{}
 
-// ApplyResourceChange passes the request to the correct channel
-// for an experimental CRUD func to process
-func ApplyResourceChange(id string, req *ApplyResourceChangeRequest) {
-	id = req.TypeName + "." + id
-
+// return correct channel
+func ApplyResourceChangeChan(resourceType, instanceID string) chan *ApplyResourceChangeRequest {
+	id := resourceType + "." + instanceID
 	applyResourceChangeRequestsMu.Lock()
 	if applyResourceChangeRequests[id] == nil {
 		applyResourceChangeRequests[id] = make(chan *ApplyResourceChangeRequest, 1)
 	}
 	applyResourceChangeRequestsMu.Unlock()
-
-	applyResourceChangeRequests[id] <- req
+	return applyResourceChangeRequests[id]
 }
 
 type ExperimentalCRUDFunc func(*ApplyResourceChangeRequest, interface{}) (*ApplyResourceChangeResponse, error)
 
 func ExperimentalCRUD(resourceType string, f ExperimentalCRUDFunc) CreateFunc {
 	return func(d *ResourceData, meta interface{}) error {
-		req := <-applyResourceChangeRequests[resourceType+"."+d.Id()]
+		req := <-ApplyResourceChangeChan(resourceType, d.Id())
 		resp, err := f(req, meta)
 		req.response = resp
 		return err
