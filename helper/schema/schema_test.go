@@ -5765,6 +5765,132 @@ func TestValidateExactlyOneOfAttributes(t *testing.T) {
 			},
 			Err: true,
 		},
+
+		"list values": {
+			Key: "allow",
+			Schema: map[string]*Schema{
+				"allow": &Schema{
+					Type:     TypeList,
+					Optional: true,
+					Elem: &Resource{
+						Schema: map[string]*Schema{
+							"protocol": {
+								Type:     TypeString,
+								Required: true,
+							},
+							"ports": {
+								Type:     TypeList,
+								Optional: true,
+								Elem: &Schema{
+									Type: TypeString,
+								},
+							},
+						},
+					},
+					ExactlyOneOf: []string{"allow", "deny"},
+				},
+				"deny": &Schema{
+					Type:     TypeList,
+					Optional: true,
+					Elem: &Resource{
+						Schema: map[string]*Schema{
+							"protocol": {
+								Type:     TypeString,
+								Required: true,
+							},
+							"ports": {
+								Type:     TypeList,
+								Optional: true,
+								Elem: &Schema{
+									Type: TypeString,
+								},
+							},
+						},
+					},
+					ExactlyOneOf: []string{"allow", "deny"},
+				},
+				"purplelist": &Schema{
+					Type:     TypeString,
+					Optional: true,
+				},
+			},
+			Config: map[string]interface{}{
+				"whitelist": []interface{}{map[string]interface{}{
+					"ports":    hcl2shim.UnknownVariableValue,
+					"protocol": hcl2shim.UnknownVariableValue,
+				}},
+				"blacklist": []interface{}{map[string]interface{}{
+					"ports":    hcl2shim.UnknownVariableValue,
+					"protocol": hcl2shim.UnknownVariableValue,
+				}},
+				"purplelist": "blah",
+			},
+			Err: false,
+		},
+
+		"set values": {
+			Key: "allow",
+			Schema: map[string]*Schema{
+				"allow": &Schema{
+					Type:     TypeSet,
+					Optional: true,
+					Elem: &Resource{
+						Schema: map[string]*Schema{
+							"protocol": {
+								Type:     TypeString,
+								Required: true,
+							},
+							"ports": {
+								Type:     TypeList,
+								Optional: true,
+								Elem: &Schema{
+									Type: TypeString,
+								},
+							},
+						},
+					},
+					ExactlyOneOf: []string{"allow", "deny"},
+				},
+				"deny": &Schema{
+					Type:     TypeSet,
+					Optional: true,
+					Elem: &Resource{
+						Schema: map[string]*Schema{
+							"protocol": {
+								Type:     TypeString,
+								Required: true,
+							},
+							"ports": {
+								Type:     TypeList,
+								Optional: true,
+								Elem: &Schema{
+									Type: TypeString,
+								},
+							},
+						},
+					},
+					ExactlyOneOf: []string{"allow", "deny"},
+				},
+				"purplelist": &Schema{
+					Type:     TypeString,
+					Optional: true,
+				},
+			},
+			Config: map[string]interface{}{
+				"whitelist": []interface{}{map[string]interface{}{
+					"ports":    hcl2shim.UnknownVariableValue,
+					"protocol": hcl2shim.UnknownVariableValue,
+				}},
+				"blacklist": []interface{}{map[string]interface{}{
+					"ports":    hcl2shim.UnknownVariableValue,
+					"protocol": hcl2shim.UnknownVariableValue,
+				}},
+				"purplelist": "blah",
+			},
+			Err: false,
+		},
+		// TODO: Test simple lists/sets (with Elem: schema.TypeString etc.)
+		// TODO: Test TypeMap
 	}
 
 	for tn, tc := range cases {
