@@ -22,8 +22,8 @@ github.com/apparentlymart/go-dump v0.0.0-20190214190832-042adf3cf4a0 h1:MzVXffFU
 github.com/apparentlymart/go-dump v0.0.0-20190214190832-042adf3cf4a0/go.mod h1:oL81AME2rN47vu18xqj1S1jPIPuN7afo62yKTNn3XMM=
 github.com/apparentlymart/go-textseg v1.0.0 h1:rRmlIsPEEhUTIKQb7T++Nz/A5Q6C9IuX2wFoYVvnCs0=
 github.com/apparentlymart/go-textseg v1.0.0/go.mod h1:z96Txxhf3xSFMPmb5X/1W05FF/Nj9VFpLOpjS5yuumk=
-github.com/apparentlymart/terraform-plugin-test v0.0.0-20191219134510-4bc82b0b604f h1:pLm5cXRmzWsXlcfMmuYYMOLTx2+RvDTTOLHH/jjH9ck=
-github.com/apparentlymart/terraform-plugin-test v0.0.0-20191219134510-4bc82b0b604f/go.mod h1:ywdJcxlX8KNuclunr9Y1Jl8GAYU0ZMbkwViaj9RNvj4=
+github.com/apparentlymart/terraform-plugin-test v0.0.0-20191219175015-cb9f72474476 h1:EcZqlcbE77wQHz307vPY4JhToyZGFUeYbKXBp4Hi8Bc=
+github.com/apparentlymart/terraform-plugin-test v0.0.0-20191219175015-cb9f72474476/go.mod h1:hYbuAV3amDbqrFlZLG1smC/QK5ZG2e1Jpq9m+Ug2qvk=
 github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310/go.mod h1:ufUuZ+zHj4x4TnLV4JWEpy2hxWSpsRywHrMgIH9cCH8=
 github.com/armon/go-radix v1.0.0 h1:F4z6KzEeeQIMeLFa97iZU6vupzoecKdU5TX24SNppXI=
 github.com/armon/go-radix v1.0.0/go.mod h1:ufUuZ+zHj4x4TnLV4JWEpy2hxWSpsRywHrMgIH9cCH8=
