@@ -7,7 +7,7 @@ require (
 	github.com/agl/ed25519 v0.0.0-20170116200512-5312a6153412 // indirect
 	github.com/apparentlymart/go-cidr v1.0.1
 	github.com/apparentlymart/go-dump v0.0.0-20190214190832-042adf3cf4a0
-	github.com/apparentlymart/terraform-plugin-test v0.0.0-20191218213318-6a742166d2b0
+	github.com/apparentlymart/terraform-plugin-test v0.0.0-20191219134510-4bc82b0b604f
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/aws/aws-sdk-go v1.25.3 // indirect
 	github.com/davecgh/go-spew v1.1.1
